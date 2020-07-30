@@ -1,0 +1,19 @@
+{
+  "name": "dict",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "linqc",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "engines": {
+    "node": ">= 6.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}

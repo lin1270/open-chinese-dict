@@ -18,7 +18,7 @@
       <div class="mid" ref="midRef">
         <div class="root">
           <div v-if="items.length" class="next" @click="onNext(-1)">上一頁</div>
-          <img class="img" :width="width * zoomValue" v-for="(item,index) in items" :key="index" :src="item.result">
+          <img class="img" :style="{width: width * zoomValue + 'px'}"  v-for="(item,index) in items" :key="index" :src="item.result">
           <div v-if="items.length" class="next" @click="onNext(1)">下一頁</div>
         </div>
       </div>
@@ -245,6 +245,10 @@ export default {
           if (dictInfo) {
             dicMgr.setCurrDic(dictInfo)
           }
+        } 
+        
+        if (!dicMgr.getCurrDic()){
+          dicMgr.setCurrDicById('kangxi')
         }
 
         const paramWord = this.getUrlParam('word')

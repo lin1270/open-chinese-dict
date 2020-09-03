@@ -48,14 +48,18 @@ var dicMgr = {
         return g_currItem;
     },
     getDicById(id) {
-        return g_dics.find((item)=>{
+        for(let item of g_dics) {
             for(let i of item) {
-                return i.id === id
+                if (i.cfg_.id === id) {
+                    return i
+                }
             }
-            return false
-        })
+        }
+
+        return null
     },
     setCurrDic(dic) {
+        console.log('...setCurrDic', dic, dic.cfg_)
         if (!dic) return
         g_currItem = dic
         window.localStorage.setItem(CURR_CFG_KEY, dic.cfg_.id)

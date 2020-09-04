@@ -59,7 +59,6 @@ var dicMgr = {
         return null
     },
     setCurrDic(dic) {
-        console.log('...setCurrDic', dic, dic.cfg_)
         if (!dic) return
         g_currItem = dic
         window.localStorage.setItem(CURR_CFG_KEY, dic.cfg_.id)

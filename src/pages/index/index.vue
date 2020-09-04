@@ -18,7 +18,9 @@
       <div class="mid" ref="midRef">
         <div class="root">
           <div v-if="items.length" class="next" @click="onNext(-1)">上一頁</div>
-          <img class="img" :style="{width: width * zoomValue + 'px'}"  v-for="(item,index) in items" :key="index" :src="item.result">
+          <p v-for="(item,index) in items" :key="index">
+            <img class="img" :style="{width: width * zoomValue + 'px'}" :src="item.result">
+          </p>
           <div v-if="items.length" class="next" @click="onNext(1)">下一頁</div>
         </div>
       </div>
@@ -302,15 +304,10 @@ html body {
 
 #app {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
   .dict-wrapper {
     position: relative;
     padding: 0 10px;
-    display: flex;
-    flex-direction: column;
     
     
     .top {
@@ -395,9 +392,6 @@ html body {
       .root {
         position: relative;
         overflow: auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
         padding: 0 10px;
 
         .img {

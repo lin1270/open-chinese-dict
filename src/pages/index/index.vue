@@ -19,9 +19,10 @@
         <div class="root">
           <div v-if="items.length" class="next" @click="onNext(-1)">上一頁</div>
           <p v-for="(item,index) in items" :key="index">
-            <img class="img" :style="{width: width * zoomValue + 'px'}" :src="item.result">
+            <center><img class="img" :style="{width: width * zoomValue + 'px'}" :src="item.result"></center>
           </p>
           <div v-if="items.length" class="next" @click="onNext(1)">下一頁</div>
+          <div v-if="items.length" class="next"><a href="#">返回頂頁</a></div>
         </div>
       </div>
 
@@ -237,6 +238,7 @@ export default {
         this.zoomValue = 1
       }
     }
+
   },
   mounted() {
     dicMgr.init((ok)=>{
@@ -261,6 +263,7 @@ export default {
         this.updateUI()
       }
     })
+
   },
 };
 </script>
@@ -286,7 +289,7 @@ export default {
 html body {
   padding: 0;
   margin: 0;
-  font-family: 'American Typewriter', 'snas', 'Microsoft YaHei', 'Simsun', 'NSimSun', 'PMingLiU', 'KaiXinSong';
+  font-family: '標楷體', 'American Typewriter', 'snas', 'Microsoft YaHei', 'Simsun', 'NSimSun', 'PMingLiU', 'KaiXinSong';
 }
 
 @btnWidth: 32px;
@@ -301,6 +304,7 @@ html body {
   font-size: 24px;
   cursor: pointer;
 }
+
 
 #app {
   position: relative;
@@ -327,9 +331,10 @@ html body {
       .menu-dict {
         padding-left: 20px;
         flex: 1;
+        font-weight: bold;
         text-align: center;
         position: relative;
-        height: 48px;
+        height: 49px;
         
         display: flex;
         align-items: center;
@@ -353,13 +358,26 @@ html body {
 
       .pre-dict {
         &::after {
-          content: '\e675';
+          content: "";
+          background-image: url(../../lib/img/backward.png);
+          background-size: 24px 24px;
+          display: inline-block;
+          width: 24px;
+          height: 24px;
+          margin-top: 5px;
         }
+        
       }
 
       .next-dict {
         &::after {
-          content: '\e677';
+          content: "";
+          background-image: url(../../lib/img/forward.png);
+          background-size: 24px 24px;
+          display: inline-block;
+          width: 24px;
+          height: 24px;
+          margin-top: 5px;
         }
       }
     }

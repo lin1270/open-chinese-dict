@@ -8,7 +8,7 @@
           <div class="commonBtn menu-down" @click.stop="onShowDictMenuBtnClicked"></div>
         </div>
         <div class="input-wrapper">
-          <form style="flex: 1;" action="javascript:return true;">
+          <form style="flex: 1;" action="javascript:;">
             <input ref="searchRef" type="search" placeholder="請輸入漢字/數字搜尋" v-model="toSearchTxt" @keyup.enter="onSearch">
           </form>
           <div class="commonBtn searchBtn" @click="onSearch"></div>

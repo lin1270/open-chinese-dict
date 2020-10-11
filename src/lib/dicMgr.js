@@ -48,12 +48,17 @@ var dicMgr = {
         return g_currItem;
     },
     getDicById(id) {
-        return g_dics.find((item)=>{
-            for(let i of item) {
-                return i.id === id
+        for(let i = 0; i < g_dics.length; ++i) {
+            let dicGroup = g_dics[i]
+            for(let j = 0; j < dicGroup.length; ++j) {
+                let dic = dicGroup[j]
+                if (dic.cfg_.id === id) {
+                    return dic
+                }
             }
-            return false
-        })
+        }
+
+        return null
     },
     setCurrDic(dic) {
         if (!dic) return

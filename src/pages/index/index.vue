@@ -1,7 +1,6 @@
 <template>
   <div id="app" @click="showDictMenu = false;showMainMenu=false">
-    <div class="dict-wrapper">
-      <div class="top">
+      <div class="top" v-if="canShowTitle">
         <div class="commonBtn pre-dict" @click="onNextDic(-1)"></div>
         <div class="commonBtn next-dict" @click="onNextDic(1)"></div>
         <div class="menu-dict">
@@ -15,10 +14,14 @@
           <div class="commonBtn searchBtn" @click="onSearch"></div>
         </div>
       </div>
-      <div class="mid" ref="midRef">
+      <div class="mid" ref="midRef" :style="canShowTitle ? '' : 'margin-top:0'">
         <div class="root">
           <div v-if="items.length" class="next" @click="onNext(-1)">上一頁</div>
-          <img class="img" :width="width * zoomValue" v-for="(item,index) in items" :key="index" :src="item.result">
+          <div v-for="(item,index) in items" :key="index">
+            <center>
+              <img class="img" :width="width * zoomValue" :src="item.result">
+            </center>
+          </div>
           <div v-if="items.length" class="next" @click="onNext(1)">下一頁</div>
         </div>
       </div>
@@ -27,11 +30,10 @@
         <div class="item" v-for="(item,index) in dics" :key="index" @click="onDictMenuItemClicked(item)">{{item.cfg_.name}}</div>
       </div>
 
-      <div class="zoom-wrapper">
+      <div v-if="canShowZoom" class="zoom-wrapper" :style="canShowTitle ? '' : 'top:10px'">
         <div class="commonBtn zoomOut" @click="onZoom(-0.2)"></div>
         <div class="commonBtn zoomIn" @click="onZoom(+0.2)"></div>
       </div>
-    </div>
   </div>
 </template>
 
@@ -55,6 +57,8 @@ export default {
       width: 600,
       items: [],
       zoomValue: 1,
+      canShowTitle: true,
+      canShowZoom: true,
     }
   },
 
@@ -124,7 +128,7 @@ export default {
 
         if (!wordToSearch) return
 
-        if (!this.isPC()) this.$refs.searchRef.blur()
+        if (!this.isPC() && this.$refs.searchRef) this.$refs.searchRef.blur()
 
         this.currDic.find(wordToSearch, (result)=>{
           if (result.error !== dicCommon.SUCCESS) {
@@ -237,6 +241,14 @@ export default {
     }
   },
   mounted() {
+    if (this.getUrlParam('notitle') === '1') {
+      this.canShowTitle = false
+    }
+
+    if (this.getUrlParam('nozoom') === '1') {
+      this.canShowZoom = false
+    }
+
     dicMgr.init((ok)=>{
       if (ok) {
         const paramDict = this.getUrlParam('dict')
@@ -298,15 +310,6 @@ html body {
 
 #app {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  .dict-wrapper {
-    position: relative;
-    padding: 0 10px;
-    display: flex;
-    flex-direction: column;
     
     
     .top {
@@ -385,15 +388,10 @@ html body {
 
     .mid {
       flex: 1;
-      overflow-y: auto;
       margin-top: 48px;
 
       .root {
         position: relative;
-        overflow: auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
         padding: 0 10px;
 
         .img {
@@ -473,7 +471,6 @@ html body {
           cursor: pointer;
         }
       }
-    }
   }
 }
 

@@ -1,5 +1,5 @@
 {
     "px2rem": false,
-    "cdn":["//www.maiyuren.com/dict/"],
+    "cdn":["//www.maiyuren.com/project/open-chinese-dict/"],
     "eslint": false
 }

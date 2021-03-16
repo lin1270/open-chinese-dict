@@ -1,8 +1,8 @@
 <template>
   <div id="app" @click="showDictMenu = false;showMainMenu=false">
       <div class="top" v-if="canShowTitle">
-        <div class="commonBtn pre-dict" @click="onNextDic(-1)"></div>
-        <div class="commonBtn next-dict" @click="onNextDic(1)"></div>
+        <div class="commonBtn pre-dict" @click.stop.prevent="onNextDic(-1)"></div>
+        <div class="commonBtn next-dict" @click.stop.prevent="onNextDic(1)"></div>
         <div class="menu-dict">
           <div class="title" @click.stop="onShowDictMenuBtnClicked">{{currDic ? currDic.cfg_.name : ''}}</div>
           <div class="commonBtn menu-down" @click.stop="onShowDictMenuBtnClicked"></div>
@@ -16,13 +16,14 @@
       </div>
       <div class="mid" ref="midRef" :style="canShowTitle ? '' : 'margin-top:0'">
         <div class="root">
-          <div v-if="items.length" class="next" @click="onNext(-1)">上一頁</div>
+          <div v-if="items.length" class="next" @click.stop.prevent="onNext(-1)">上一頁</div>
           <div v-for="(item,index) in items" :key="index">
             <center>
               <img class="img" :width="width * zoomValue" :src="item.result">
             </center>
           </div>
-          <div v-if="items.length" class="next" @click="onNext(1)">下一頁</div>
+          <div v-if="items.length" class="next" @click.stop.prevent="onNext(1)">下一頁</div>
+          <br><br>
         </div>
       </div>
 
@@ -31,8 +32,8 @@
       </div>
 
       <div v-if="canShowZoom" class="zoom-wrapper" :style="canShowTitle ? '' : 'top:10px'">
-        <div class="commonBtn zoomOut" @click="onZoom(-0.2)"></div>
-        <div class="commonBtn zoomIn" @click="onZoom(+0.2)"></div>
+        <div class="commonBtn zoomOut" @click.stop.prevent="onZoom(-0.2)"></div>
+        <div class="commonBtn zoomIn" @click.stop.prevent="onZoom(+0.2)"></div>
       </div>
   </div>
 </template>

@@ -10,7 +10,7 @@ const CURR_CFG_KEY = "currDictCfgKey_"
 var dicMgr = {
     init(cb) {
         $.ajax({
-            url: 'http://www.maiyuren.com/static/open-chinese-dict-static/menu.json?time=' + new Date().getTime(), 
+            url: '//www.maiyuren.com/static/open-chinese-dict-static/menu.json?time=' + new Date().getTime(), 
             type: 'GET',
             dataType: 'json',
             success: (result)=>{
